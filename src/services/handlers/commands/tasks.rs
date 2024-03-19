@@ -3,7 +3,7 @@ use crate::domain::models::tasks::Task;
 use crate::adapters::tasks::TaskRepository;
 
 
-pub fn create_task_handler(command: CreateTaskCommand) -> Task {
+pub fn create_task_handler(command: CreateTaskCommand)  {
     let mut repository = TaskRepository::new();
 
     // Example of storing a task
@@ -14,6 +14,4 @@ pub fn create_task_handler(command: CreateTaskCommand) -> Task {
         assigner: command.assigner,
         due_date: command.due_date,
     });
-
-    new_task
 }
