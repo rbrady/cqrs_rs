@@ -7,18 +7,19 @@ pub struct TaskRepository {
 
 impl TaskRepository {
     pub fn new() -> Self {
-        TaskRepository { tasks: Vec::new(), next_id: 1 }
+        Self {
+            tasks: Vec::new(), next_id: 1
+        }
     }
 
-    pub fn create(&mut self, mut task: Task) -> Task {
+    pub fn create(&mut self, mut task: Task) {
         task.id = Some(self.next_id);
         self.next_id += 1;
-        self.tasks.push(task);
-        task
+        self.tasks.push(task)
     }
 
     pub fn get(&self, id: u32) -> Option<&Task> {
-        self.tasks.iter().find(|&task| task.id == id)
+        self.tasks.iter().find(|&task| task.id == Option::from(id))
     }
 
     pub fn update(&mut self, updated_task: Task) -> Option<()> {
@@ -28,12 +29,12 @@ impl TaskRepository {
     }
 
     pub fn delete(&mut self, id: u32) -> Option<()> {
-        let pos = self.tasks.iter().position(|task| task.id == id)?;
+        let pos = self.tasks.iter().position(|task| task.id == Option::from(id))?;
         self.tasks.remove(pos);
         Some(())
     }
 
-    pub fn list(&self) -> &Vec<Task> {
-        &self.tasks
+    pub fn list(self) -> Vec<Task> {
+        self.tasks
     }
 }

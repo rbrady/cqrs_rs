@@ -15,7 +15,7 @@ impl TaskService {
     }
 
 
-    pub fn create(&self, title: String, description: String, assigner: String, due_date: NaiveDate) -> Task {
+    pub fn create(&self, title: String, description: String, assigner: String, due_date: NaiveDate) {
         // receives args from the caller, constructs a command, and calls the handler
         let command = CreateTaskCommand {
             title,
@@ -24,14 +24,11 @@ impl TaskService {
             due_date,
         };
 
-        let task = create_task_handler(command);
-        task
-
+        create_task_handler(command)
     }
 
     pub fn list(&self) -> Vec<Task> {
         // we only have a single handler for listing tasks
-        let tasks = list_tasks_handler();
-        tasks
+        list_tasks_handler()
     }
 }
