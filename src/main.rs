@@ -5,10 +5,12 @@ mod adapters;
 
 use chrono::NaiveDate;
 use crate::services::tasks::TaskService;
+use crate::domain::models::tasks::Task;
 
 
 fn main() {
-    let task_service = TaskService::new();
+    let mut in_mem_db:Vec<Task> = Vec::new();
+    let mut task_service = TaskService::new(&mut in_mem_db);
 
     // Add 3 tasks
     task_service.create(

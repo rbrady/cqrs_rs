@@ -1,7 +1,7 @@
 extern crate chrono;
 use chrono::NaiveDate;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Task {
     pub id: Option<u32>,
     pub title: String,
